@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-import urllib.request
+import urllib
+from urllib import request
+# import urllib.request
+
 from bs4 import BeautifulSoup
 
 
@@ -17,16 +20,16 @@ def read_write_image(meme_template, pages, path, file):
 
         # Get _just_ the photo_gallery div
         test = soup.find(id='base-left')
-        print(test)
-        # path2 = soup.find(class='base-unit clearfix')
+        # the problem is that class already has an assigned function in python
+        # path2 = soup.find(class_='base-unit clearfix')
         # path3 = soup.find(class="base-img-wrap-wrap")
         # path4 = soup.find(class="base-img-wrap")
 
         # Loop through all item divs in the photo_gallery div
-        for image in test.findAll(class_='item'):
+        for image in test.findAll(src_='item'):
 
             # Within each item div, get the photo div
-            photo = image.find(class_='photo')
+            photo = image.find(class_='base-img')
             # Within that photo div, get the img tag which has `class = ""`
             # There's probably some method to find an img tag
             img = photo.find(class_='')
@@ -51,11 +54,11 @@ def read_write_image(meme_template, pages, path, file):
 
 
 def main():
-    meme_template = input("Enter the meme template part of the url from knowyourmeme.com: ")
-    pages = input("Scroll to the bottom and input how many pages there are: ")
-    path = input("Enter the full file path to where you wan the images to be saved: ")
-    file = input("enter the name of what you want the base file to be called: ")
-    read_write_image(meme_template, pages, path, file)
+    # meme_template = input("Enter the meme template part of the url from knowyourmeme.com: ")
+    # pages = input("Scroll to the bottom and input how many pages there are: ")
+    # path = input("Enter the full file path to where you wan the images to be saved: ")
+    # file = input("enter the name of what you want the base file to be called: ")
+    read_write_image(meme_template='Spongebob-Ight-Imma-Head-Out', pages='96', path='/home/greco/Documents/Memev2/SpongebobImmaHeadOut', file='sbiho')
 
 
 if __name__ == '__main__':
