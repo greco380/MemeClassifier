@@ -8,7 +8,7 @@ def read_write_image(meme_template, pages, path, file):
     p = 1
     i = 0
     while p <= int(pages):
-        url = 'https://knowyourmeme.com/memes/' + meme_template + '/photos/page/' + str(p)
+        url = 'https://imgflip.com/meme/' + meme_template + '?page=' + str(p)
         # Download the entire page
         html = urllib.request.urlopen(url)
 
@@ -16,8 +16,11 @@ def read_write_image(meme_template, pages, path, file):
         soup = BeautifulSoup(html, 'html.parser')
 
         # Get _just_ the photo_gallery div
-        test = soup.find(id='photo_gallery')
-
+        test = soup.find(id='base-left')
+        print(test)
+        # path2 = soup.find(class='base-unit clearfix')
+        # path3 = soup.find(class="base-img-wrap-wrap")
+        # path4 = soup.find(class="base-img-wrap")
 
         # Loop through all item divs in the photo_gallery div
         for image in test.findAll(class_='item'):
