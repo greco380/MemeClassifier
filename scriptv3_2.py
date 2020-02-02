@@ -31,15 +31,19 @@ def read_write_image(meme_template, pages, path, file):
             # for the image. To get the full size image, change 'masonry' to 'original'
             # There's probably a way to download images from URL to file with urllib
             real_photo_link = img.get('data-src')
-            real_photo_link = real_photo_link.replace('masonry', 'original')
-            real_photo_link = urllib.request.urlopen(real_photo_link)
-            print("image " + str(i) + ":")
-            print(real_photo_link)
-            # save it to a new file...
-            output = open(path+'/'+file+str(i)+'.jpg', 'wb')
-            image_file = output.write(real_photo_link.read())
-            print("------------------\n")
-            i += 1
+            if real_photo_link is None:
+                print('No Image\n-------------')
+                pass
+            else:
+                real_photo_link = real_photo_link.replace('masonry', 'original')
+                real_photo_link = urllib.request.urlopen(real_photo_link)
+                print("image " + str(i) + ":")
+                # print(real_photo_link)
+                # save it to a new file...
+                output = open(path+'/'+file+str(i)+'.jpg', 'wb')
+                image_file = output.write(real_photo_link.read())
+                print("--------DONE----------\n")
+                i += 1
         p += 1
 
 
